@@ -31,7 +31,7 @@ export const site = {
   cv: {
     pdf: "/cv/mahmut_karaarslan_cv.pdf",
     // Rendered from the PDF; give each new export a new file name so caches pick it up
-    image: "/cv/mahmut-karaarslan-cv-2026-11.jpg",
+    image: "/cv/mahmut-karaarslan-cv-2026-11-14.jpg",
     width: 2480,
     height: 3507,
   },
@@ -111,9 +111,9 @@ export const pages = {
 export const updated: Record<string, string> = {
   "/": "2026-11-14",
   "/development": "2026-11-14",
-  "/character-animations": "2026-11-07",
-  "/playable-ad": "2026-11-07",
-  "/marketing-videos": "2026-11-07",
+  "/character-animations": "2026-11-14",
+  "/playable-ad": "2026-11-14",
+  "/marketing-videos": "2026-11-14",
   "/cv": "2026-11-14",
   "/contact": "2026-11-07",
 };

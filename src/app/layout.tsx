@@ -8,16 +8,18 @@ import { pageMetadata, personJsonLd } from "./lib/seo";
 import { site } from "./lib/site";
 import "./globals.css";
 
-// Hanken Grotesk for headings; Inter carries the body text
+// Hanken Grotesk for headings; Inter carries the body text.
+// Only the latin subset: the site text is English, so latin-ext (Turkish ş/ğ/İ etc.) was
+// an extra preloaded file per font that nothing used. Add it back if Turkish text is added.
 const hankenGrotesk = Hanken_Grotesk({
   variable: "--font-hanken-grotesk",
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   display: "swap",
 });
 

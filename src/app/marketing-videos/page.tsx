@@ -4,6 +4,7 @@ import JsonLd from "../components/JsonLd";
 import { getWork } from "../lib/site";
 import { pageMetadata, videosJsonLd } from "../lib/seo";
 import VideoPlayer from "../components/VideoPlayer";
+import { videoTitle } from "../lib/videos";
 
 const item = getWork("marketing-videos");
 
@@ -47,11 +48,13 @@ export default function MarketingVideosPage() {
             key={video.src}
             className="grid items-center gap-6 py-10 first:pt-0 last:pb-0 sm:py-14 md:grid-cols-[minmax(0,1fr)_22rem] md:gap-16"
           >
-            <p
-              className="max-w-md text-lg leading-relaxed sm:text-xl"
-            >
-              {video.note}
-            </p>
+            <div className="max-w-md">
+              {/* Plain text, not a heading, so the page's heading structure stays as it was */}
+              <p className="mb-3 font-display text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+                {videoTitle(video.src)}
+              </p>
+              <p className="text-lg leading-relaxed sm:text-xl">{video.note}</p>
+            </div>
             <div className="w-full max-w-[22rem] mx-auto md:mx-0 rounded-2xl overflow-hidden border border-line bg-black hover:border-line-strong transition-colors">
               <VideoPlayer
                 src={video.src}

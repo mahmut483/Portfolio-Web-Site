@@ -198,6 +198,8 @@ export default function DevelopmentPage() {
                 id="gearbag-video"
                 src="/media/gearbag/gearbag.mp4"
                 poster="/media/gearbag/gearbag.jpg"
+                // Loaded up front so "Watch Fullscreen" can enter fullscreen on iPhone
+                preload="metadata"
                 className="w-full aspect-[9/16] object-cover"
               />
             </div>

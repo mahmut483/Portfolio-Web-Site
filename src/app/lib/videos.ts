@@ -105,3 +105,8 @@ export const videos: VideoInfo[] = [
 export function videosFor(page: WorkSlug) {
   return videos.filter((v) => v.page === page);
 }
+
+// Name for a video file, used as the player's accessible name and as its visible title
+export function videoTitle(src: string) {
+  return videos.find((v) => v.src === src)?.title;
+}

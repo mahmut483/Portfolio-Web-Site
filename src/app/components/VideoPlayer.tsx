@@ -1,12 +1,16 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import { videoTitle } from "../lib/videos";
 
 interface VideoPlayerProps {
   id?: string;
   src: string;
   poster?: string;
   className?: string;
+  // "none" (default) waits for play, so videos further down the page don't fetch on load.
+  // Use "metadata" where a script needs the video ready, e.g. the iPhone fullscreen button.
+  preload?: "none" | "metadata";
 }
 
 export default function VideoPlayer({
@@ -14,6 +18,7 @@ export default function VideoPlayer({
   src,
   poster,
   className,
+  preload = "none",
 }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   // Fullscreen letterboxing is handled by the video:fullscreen rule in globals.css
@@ -81,9 +86,10 @@ export default function VideoPlayer({
       id={id}
       src={src}
       poster={poster}
+      aria-label={videoTitle(src)}
       controls
       playsInline
-      preload="metadata"
+      preload={preload}
       onPlay={handlePlay}
       className={className}
     />
