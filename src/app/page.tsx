@@ -1,12 +1,15 @@
 import Link from "next/link";
 import PreviewVideo from "./components/PreviewVideo";
 import { ArrowUpRight } from "./components/icons";
-import { work } from "./lib/site";
+import JsonLd from "./components/JsonLd";
+import { profilePageJsonLd } from "./lib/seo";
+import { site, work } from "./lib/site";
 import { container } from "./lib/ui";
 
 export default function Home() {
   return (
     <main className={container}>
+      <JsonLd data={profilePageJsonLd()} />
       <section className="pb-12 pt-28 sm:pb-16 sm:pt-36">
         <h1 className="text-center sm:text-left font-display text-[clamp(3.25rem,8.4vw,6.75rem)] font-semibold leading-[0.9] tracking-[-0.035em]">
           Mahmut <br className="lg:hidden" />
@@ -14,7 +17,7 @@ export default function Home() {
         </h1>
       </section>
 
-      <section aria-labelledby="work-heading" className="pb-20 sm:pb-28">
+      <section aria-labelledby="work-heading" className="pb-16 sm:pb-20">
         <h2 id="work-heading" className="text-center sm:text-left mb-6 font-display text-2xl font-semibold tracking-[-0.02em]">
           My Works
         </h2>
@@ -42,6 +45,13 @@ export default function Home() {
             </li>
           ))}
         </ul>
+      </section>
+
+      {/* Short intro under the work grid */}
+      <section className="pb-20 text-center sm:pb-28">
+        <p className="mx-auto max-w-2xl text-lg leading-relaxed text-mist sm:text-xl">
+          <span className="font-medium text-ink">{site.role}.</span> {site.intro}
+        </p>
       </section>
     </main>
   );

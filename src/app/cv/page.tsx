@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Download } from "../components/icons";
-import { site } from "../lib/site";
+import { pages, site } from "../lib/site";
+import { pageMetadata } from "../lib/seo";
 import { buttonPrimary, container } from "../lib/ui";
 
-export const metadata: Metadata = {
-  title: "CV",
-};
+export const metadata: Metadata = pageMetadata({ path: "/cv", ...pages.cv });
 
 export default function CvPage() {
   return (

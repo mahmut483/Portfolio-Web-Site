@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import CopyableField from "../components/CopyableField";
 import { ArrowUpRight } from "../components/icons";
-import { site } from "../lib/site";
+import { pages, site } from "../lib/site";
+import { pageMetadata } from "../lib/seo";
 import { container } from "../lib/ui";
 
-export const metadata: Metadata = {
-  title: "Contact",
-};
+export const metadata: Metadata = pageMetadata({ path: "/contact", ...pages.contact });
 
 const row = "grid min-h-16 grid-cols-[5rem_minmax(0,1fr)] items-center gap-4 py-3 sm:grid-cols-[9rem_minmax(0,1fr)]";
 

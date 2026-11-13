@@ -3,6 +3,8 @@ import Script from "next/script";
 import { Inter, Hanken_Grotesk } from "next/font/google";
 import SiteHeader from "./components/SiteHeader";
 import SmoothScroll from "./components/SmoothScroll";
+import JsonLd from "./components/JsonLd";
+import { pageMetadata, personJsonLd } from "./lib/seo";
 import { site } from "./lib/site";
 import "./globals.css";
 
@@ -26,18 +28,14 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mahmut-karaarslan.vercel.app"),
+  metadataBase: new URL(site.url),
   title: {
     default: `${site.name} · ${site.role}`,
     template: `%s · ${site.name}`,
   },
-  description:
-    "Character Animations, video ads and playable ads for mobile games.",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    siteName: site.name,
-  },
+  ...pageMetadata({ path: "/", description: site.description }),
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
   verification: {
     google: "3_xQr1Oew08iykJSsBbFDe7E-xu21xo26o0b8v5WS5E",
   },
@@ -68,6 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
+        <JsonLd data={personJsonLd()} />
         <SiteHeader />
         <SmoothScroll />
         <div id="content" className="flex flex-1 flex-col">

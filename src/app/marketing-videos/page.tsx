@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
 import WorkHeader from "../components/WorkHeader";
+import JsonLd from "../components/JsonLd";
+import { getWork } from "../lib/site";
+import { pageMetadata, videosJsonLd } from "../lib/seo";
 import VideoPlayer from "../components/VideoPlayer";
 
-export const metadata: Metadata = {
-  title: "Marketing Videos",
-};
+const item = getWork("marketing-videos");
+
+export const metadata: Metadata = pageMetadata({
+  path: "/marketing-videos",
+  title: item.title,
+  description: item.description,
+});
 
 const blackLedgerNote =
   "Everything except the illustrations is mine. The 2D animations were AI-generated in Unity to my specifications. Editing done in After Effects.";
@@ -30,6 +37,7 @@ const videos = [
 export default function MarketingVideosPage() {
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 pb-24 pt-28 sm:px-8 sm:pb-32 sm:pt-36">
+      <JsonLd data={videosJsonLd("marketing-videos")} />
       <WorkHeader slug="marketing-videos" />
 
       {/* One video per row: note on the left, video on the right */}

@@ -23,6 +23,12 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // The game and playable are embedded on /development and /playable-ad. Keep the bare
+        // HTML files out of search results so Google sends people to the pages instead.
+        source: "/media/:path*/:file(.+\\.html)",
+        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
+      },
+      {
         source: "/media/match3/game/Build/:file(.+\\.unityweb)",
         headers: [{ key: "Content-Encoding", value: "gzip" }],
       },

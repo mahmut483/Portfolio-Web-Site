@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
 import WorkHeader from "../components/WorkHeader";
+import JsonLd from "../components/JsonLd";
+import { getWork } from "../lib/site";
+import { pageMetadata, playableJsonLd } from "../lib/seo";
 import PlayableFrame from "../components/PlayableFrame";
 import { ArrowUpRight } from "../components/icons";
 
-export const metadata: Metadata = {
-  title: "Playable Ad",
-};
+const item = getWork("playable-ad");
+
+export const metadata: Metadata = pageMetadata({
+  path: "/playable-ad",
+  title: item.title,
+  description: item.description,
+});
 
 const GAME = "/media/playablead/playablead.html";
 
 export default function PlayableAdPage() {
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-4 pb-24 pt-28 sm:px-8 sm:pb-32 sm:pt-36">
+      <JsonLd data={playableJsonLd()} />
       {/* ── Top section: Description (left) + Game (right) ── */}
       <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_1fr] lg:gap-12">
         {/* Left: Header + Description */}

@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
 import WorkHeader from "../components/WorkHeader";
+import JsonLd from "../components/JsonLd";
+import { getWork } from "../lib/site";
+import { pageMetadata, videosJsonLd } from "../lib/seo";
 import VideoPlayer from "../components/VideoPlayer";
 
-export const metadata: Metadata = {
-  title: "Character Animations",
-};
+const item = getWork("character-animations");
+
+export const metadata: Metadata = pageMetadata({
+  path: "/character-animations",
+  title: item.title,
+  description: item.description,
+});
 
 const rigVideo = {
   src: "/media/charanim/charanim1.mp4",
@@ -28,6 +35,7 @@ const animationVideos = [
 export default function CharacterAnimationsPage() {
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-4 pb-24 pt-28 sm:px-8 sm:pb-32 sm:pt-36">
+      <JsonLd data={videosJsonLd("character-animations")} />
       {/* ── Top section: Description (left) + Rig Demo Video (right) ── */}
       <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_1fr] lg:gap-12">
         {/* Left: Header + Description */}

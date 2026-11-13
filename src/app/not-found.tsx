@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { buttonPrimary, container } from "./lib/ui";
+
+// Next.js adds noindex to this page by itself
+export const metadata: Metadata = {
+  title: "Page not found",
+  // Drop the home page's canonical and og:url inherited from the root layout
+  alternates: { canonical: null },
+  openGraph: null,
+};
 
 export default function NotFound() {
   return (

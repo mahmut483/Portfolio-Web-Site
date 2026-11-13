@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
 import WorkHeader from "../components/WorkHeader";
+import JsonLd from "../components/JsonLd";
+import { getWork } from "../lib/site";
+import { pageMetadata, videosJsonLd, gameJsonLd } from "../lib/seo";
 import VideoPlayer from "../components/VideoPlayer";
 import PlayableFrame from "../components/PlayableFrame";
 import FullscreenVideoButton from "../components/FullscreenVideoButton";
 import { ArrowUpRight } from "../components/icons";
 
-export const metadata: Metadata = {
-  title: "Development",
-};
+const item = getWork("development");
+
+export const metadata: Metadata = pageMetadata({
+  path: "/development",
+  title: item.title,
+  description: item.description,
+});
 
 // WebGL build of Pirates Match: game board only, endless demo rounds
 const GAME = "/media/match3/game/index.html";
@@ -23,6 +30,8 @@ const piratesVideos = [
 export default function DevelopmentPage() {
   return (
     <main className="w-full flex-1 pb-24 pt-28 sm:pb-32 sm:pt-36">
+      <JsonLd data={videosJsonLd("development")} />
+      <JsonLd data={gameJsonLd()} />
       {/* ── Project 1: Pirates Match ── */}
       <section className="mx-auto w-full max-w-6xl px-4 sm:px-8">
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_1fr] lg:gap-12">
