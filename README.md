@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
 
-## Getting Started
-
-First, run the development server:
+Video portfolio built with Next.js 16 (App Router, Tailwind 4).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route | Content |
+|---|---|
+| `/` | Work cards with looping previews (`public/media/previews/<name>.mp4` + `.jpg`), listed in `src/app/lib/site.ts` → `work` |
+| `/development` | Pirates Match: Unity WebGL build (`public/media/match3/game/`) + videos, and the Brew Games case (`public/media/gearbag/`) |
+| `/character-animations` | Videos from `public/media/charanim/` |
+| `/marketing-videos` | Videos from `public/media/reels/` |
+| `/playable-ad` | Playable ad (`public/media/playablead/playablead.html`), loads when "Play" is pressed |
+| `/cv`, `/contact` | CV and contact details, from `site` in `src/app/lib/site.ts` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Old paths (`/match3`, `/charanim`, `/playablead`, `/reels`) redirect permanently to the new ones (`next.config.ts`).
 
-## Learn More
+Each video's poster is the `.jpg` with the same name next to the `.mp4`.
 
-To learn more about Next.js, take a look at the following resources:
+Files under `/media` are cached by browsers for a day (`next.config.ts`). When replacing a file in place,
+visitors may see the old version for up to a day; rename it (e.g. `-v2`) to update immediately.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Adding a video
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To play in every browser and start quickly, add videos as H.264 + AAC `.mp4` with `faststart` at a reasonable size
+(`.mov` / PCM audio does not play in Firefox; GitHub rejects files over 100 MB):
 
-## Deploy on Vercel
+```bash
+ffmpeg -i input.mov -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p -vf "scale='min(1080,iw)':-2" \
+  -c:a aac -b:a 160k -movflags +faststart output.mp4
+ffmpeg -i output.mp4 -frames:v 1 -vf "scale='min(960,iw)':-2" -q:v 4 output.jpg   # poster frame
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Then add it to the page's `videos` list as `src` and `poster`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Updating the Unity WebGL build
+
+Export with gzip compression and the decompression fallback enabled, then replace
+`public/media/match3/game/Build/`. `next.config.ts` serves `*.unityweb` with `Content-Encoding: gzip`
+(and `.wasm.unityweb` as `application/wasm`), so the file names must keep the `.unityweb` suffix.

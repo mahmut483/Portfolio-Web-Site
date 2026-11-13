@@ -1,69 +1,48 @@
-import Image from "next/image";
+import Link from "next/link";
+import PreviewVideo from "./components/PreviewVideo";
+import { ArrowUpRight } from "./components/icons";
+import { work } from "./lib/site";
+import { container } from "./lib/ui";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className={container}>
+      <section className="pb-12 pt-28 sm:pb-16 sm:pt-36">
+        <h1 className="text-center sm:text-left font-display text-[clamp(3.25rem,8.4vw,6.75rem)] font-semibold leading-[0.9] tracking-[-0.035em]">
+          Mahmut <br className="lg:hidden" />
+          Karaarslan
+        </h1>
+      </section>
+
+      <section aria-labelledby="work-heading" className="pb-20 sm:pb-28">
+        <h2 id="work-heading" className="text-center sm:text-left mb-6 font-display text-2xl font-semibold tracking-[-0.02em]">
+          My Works
+        </h2>
+
+        <ul className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-4 lg:grid-cols-4">
+          {work.map((item) => (
+            <li key={item.slug}>
+              <Link href={`/${item.slug}`} className="group block rounded-[1.25rem] focus-visible:outline-offset-4">
+                <div className="relative aspect-[9/16] overflow-hidden rounded-[1.25rem] bg-panel ring-1 ring-line transition-shadow duration-300 group-hover:ring-line-strong">
+                  <PreviewVideo
+                    src={item.preview}
+                    poster={item.poster}
+                    sizes="(min-width: 1280px) 296px, (min-width: 1024px) 23vw, 48vw"
+                  />
+                </div>
+                <div className="mt-3.5 flex items-center justify-between gap-3">
+                  <h3 className="font-display text-lg font-semibold leading-tight tracking-[-0.01em] sm:text-xl">
+                    {item.title}
+                  </h3>
+                  <span className="hidden size-8 shrink-0 place-items-center rounded-full border border-line-strong text-mist transition-colors duration-300 group-hover:border-ink group-hover:bg-ink group-hover:text-night sm:grid">
+                    <ArrowUpRight />
+                  </span>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </main>
   );
 }

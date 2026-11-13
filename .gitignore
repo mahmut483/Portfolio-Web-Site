@@ -1,6 +1,70 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ─── Secrets & credentials (this repo is public: never commit these) ───
+.env*
+!.env.example
+*.pem
+*.key
+*.p8
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.mobileprovision
+*.provisionprofile
+google-services.json
+GoogleService-Info.plist
+*service-account*.json
+*service_account*.json
+*serviceAccount*.json
+*-key.json
+*_key.json
+*credentials*.json
+client_secret*.json
+token.json
+auth.json
+*apikey*
+*api-key*
+*api_key*
+secrets.*
+.secret*
+id_rsa*
+id_ed25519*
+id_ecdsa*
+.ssh/
+.aws/
+.dev.vars
+.sentryclirc
+sentry.properties
+.firebaserc
+.firebase/
+*.sqlite
+*.sqlite3
+*.db
+.npmrc
+.netrc
 
-# dependencies
+# ─── Local tool / account state ───
+# .vercel holds the linked project/team IDs
+.vercel
+.claude/
+.idea/
+.vscode/
+*.code-workspace
+
+# ─── Site assets: videos, CV, game builds and client work stay out of the public repo ───
+# Deploys still include them: the Vercel CLI reads .vercelignore, not this file.
+# A Git-connected Vercel deploy would NOT have them, so keep deploying with `vercel --prod`.
+/public/
+
+# ─── Source footage (only the optimized files in public/ are served) ───
+/mahmut-karaarslan_orijinal_videolar/
+/mallar/
+*.mov
+*.psd
+*.aep
+*.blend
+*.blend1
+
+# ─── Dependencies ───
 /node_modules
 /.pnp
 .pnp.*
@@ -10,32 +74,22 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
+# ─── Build output ───
 /coverage
-
-# next.js
 /.next/
 /out/
-
-# production
 /build
+*.tsbuildinfo
+next-env.d.ts
 
-# misc
-.DS_Store
-*.pem
-
-# debug
+# ─── Logs ───
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# ─── OS junk ───
+.DS_Store
+Thumbs.db
+desktop.ini

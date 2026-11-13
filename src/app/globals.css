@@ -1,26 +1,90 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Palette: deep forest emerald */
+@theme {
+  --color-night: #081f01;
+  --color-panel: #0d2802;
+  --color-raised: #153c05;
+  --color-ink: #eef1f6;
+  --color-mist: #9aa4b6;
+  --color-line: rgb(226 232 240 / 0.1);
+  --color-line-strong: rgb(226 232 240 / 0.22);
+
+  --ease-out-soft: cubic-bezier(0.22, 0.8, 0.24, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-hanken-grotesk), var(--font-inter), sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Base rules live in a layer so Tailwind utilities (font-bold, outline-*, ...) can override them */
+@layer base {
+  h1, h2, h3 {
+    font-family: var(--font-hanken-grotesk), var(--font-inter), sans-serif;
+    font-weight: 600;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
   }
 }
 
+html {
+  color-scheme: dark;
+  background-color: var(--color-night);
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 44px 44px;
+  background-attachment: fixed;
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-night);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #193d07;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #25580c;
+}
+
+/* Fix fullscreen video aspect ratio to prevent cropping */
+video:fullscreen {
+  object-fit: contain !important;
+  background-color: #000 !important;
+}
+
+video:-webkit-full-screen {
+  object-fit: contain !important;
+  background-color: #000 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
