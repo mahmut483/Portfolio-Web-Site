@@ -33,7 +33,7 @@ export default function DevelopmentPage() {
       <JsonLd data={videosJsonLd("development")} />
       <JsonLd data={gameJsonLd()} />
       {/* ── Project 1: Pirates Match ── */}
-      <section className="mx-auto w-full max-w-6xl px-4 sm:px-8">
+      <section id="pirates-match" data-section className="mx-auto w-full max-w-6xl scroll-mt-28 px-4 sm:px-8">
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_1fr] lg:gap-12">
           {/* Left: Header + Description */}
           <div>
@@ -118,7 +118,7 @@ export default function DevelopmentPage() {
         </div>
 
         {/* Pirates Match Videos */}
-        <div className="mt-12 sm:mt-16">
+        <div id="pirates-match-videos" data-section className="mt-12 scroll-mt-28 sm:mt-16">
           <h3 className="mb-6 font-display text-2xl font-semibold tracking-tight text-left sm:text-3xl">
             Pirates Match Videos
           </h3>
@@ -144,7 +144,7 @@ export default function DevelopmentPage() {
       <hr className="w-full border-0 border-t border-line-strong my-20 sm:my-28" />
 
       {/* ── Project 2: Brew Games Case ── */}
-      <section className="mx-auto w-full max-w-6xl px-4 sm:px-8">
+      <section id="brew-games-case" data-section className="mx-auto w-full max-w-6xl scroll-mt-28 px-4 sm:px-8">
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_1fr] lg:gap-12">
           {/* Left: Description */}
           <div>

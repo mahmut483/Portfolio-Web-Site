@@ -85,7 +85,7 @@ export default function CharacterAnimationsPage() {
       </div>
 
       {/* ── Bottom section: Animation Videos ── */}
-      <div className="mt-16 sm:mt-20">
+      <div id="other-animations" data-section className="mt-16 scroll-mt-28 sm:mt-20">
         <h2 className="mb-6 font-display text-2xl font-semibold tracking-tight text-center sm:text-left sm:text-3xl">
           Other Animations
         </h2>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import SiteHeader from "../components/SiteHeader";
 import SmoothScroll from "../components/SmoothScroll";
+import SectionSpy from "../components/SectionSpy";
 import JsonLd from "../components/JsonLd";
 import { pageMetadata, personJsonLd } from "../lib/seo";
 import { site } from "../lib/site";
@@ -37,6 +38,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <JsonLd data={personJsonLd()} />
       <SiteHeader />
       <SmoothScroll />
+      <SectionSpy />
       <div id="content" className="flex flex-1 flex-col">
         {children}
       </div>
