@@ -21,12 +21,12 @@ function setHash(hash: string) {
 export default function SectionSpy() {
   const pathname = usePathname();
 
-  // Reload: drop the hash and start at the top (runs once per page load)
+  // Reload: always start at the top, without a hash (runs once per page load)
   useEffect(() => {
     const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
-    if (nav?.type === "reload" && window.location.hash) {
+    if (nav?.type === "reload") {
       window.history.scrollRestoration = "manual";
-      setHash("");
+      if (window.location.hash) setHash("");
       window.scrollTo(0, 0);
     }
   }, []);
@@ -34,18 +34,29 @@ export default function SectionSpy() {
   useEffect(() => {
     let frame = 0;
     let current = window.location.hash;
+    // Arrived through a shared link: keep that hash until the visitor scrolls or interacts themselves
+    let armed = !window.location.hash;
 
     const update = () => {
       frame = 0;
-      const sections = document.querySelectorAll<HTMLElement>("[data-section][id]");
+      if (!armed) return;
+      // Next keeps recently visited pages mounted but hidden (<Activity>); their sections have no
+      // layout boxes and must not count, or another page's hash shows up here.
+      const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-section][id]")).filter(
+        (s) => s.getClientRects().length > 0,
+      );
       if (!sections.length) return;
+
       let active = "";
-      if (window.scrollY > TOP_OFFSET) {
+      const atBottom =
+        window.scrollY > 0 &&
+        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+      if (atBottom) {
+        // A short page may never scroll its last section up to the line
+        active = `#${sections[sections.length - 1].id}`;
+      } else if (window.scrollY > TOP_OFFSET) {
         const line = window.innerHeight * 0.35; // a section is current once its top passes this line
         for (const s of sections) {
-          // Next keeps recently visited pages mounted but hidden (<Activity>); their sections have
-          // no layout boxes and must not count, or another page's hash shows up here.
-          if (!s.getClientRects().length) continue;
           if (s.getBoundingClientRect().top <= line) active = `#${s.id}`;
         }
       }
@@ -58,8 +69,14 @@ export default function SectionSpy() {
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
+    const arm = () => {
+      armed = true;
+    };
+    const userEvents = ["wheel", "touchstart", "keydown", "pointerdown"] as const;
+    userEvents.forEach((e) => window.addEventListener(e, arm, { passive: true, once: true }));
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
+      userEvents.forEach((e) => window.removeEventListener(e, arm));
       window.removeEventListener("scroll", onScroll);
       if (frame) cancelAnimationFrame(frame);
     };
