@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Download } from "../components/icons";
-import { pages, site } from "../lib/site";
-import { pageMetadata } from "../lib/seo";
-import { buttonPrimary, container } from "../lib/ui";
+import { Download } from "../../components/icons";
+import { pages, site } from "../../lib/site";
+import { pageMetadata } from "../../lib/seo";
+import { buttonPrimary, container } from "../../lib/ui";
 
 export const metadata: Metadata = pageMetadata({ path: "/cv", ...pages.cv });
 

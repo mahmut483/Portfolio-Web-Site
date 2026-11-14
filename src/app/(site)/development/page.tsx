@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import WorkHeader from "../components/WorkHeader";
-import JsonLd from "../components/JsonLd";
-import { getWork } from "../lib/site";
-import { pageMetadata, videosJsonLd, gameJsonLd } from "../lib/seo";
-import VideoPlayer from "../components/VideoPlayer";
-import PlayableFrame from "../components/PlayableFrame";
-import FullscreenVideoButton from "../components/FullscreenVideoButton";
-import { ArrowUpRight } from "../components/icons";
+import WorkHeader from "../../components/WorkHeader";
+import JsonLd from "../../components/JsonLd";
+import { getWork } from "../../lib/site";
+import { pageMetadata, videosJsonLd, gameJsonLd } from "../../lib/seo";
+import VideoPlayer from "../../components/VideoPlayer";
+import PlayableFrame from "../../components/PlayableFrame";
+import FullscreenVideoButton from "../../components/FullscreenVideoButton";
+import { ArrowUpRight } from "../../components/icons";
 
 const item = getWork("development");
 

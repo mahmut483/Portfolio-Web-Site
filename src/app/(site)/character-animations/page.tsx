@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import WorkHeader from "../components/WorkHeader";
-import JsonLd from "../components/JsonLd";
-import { getWork } from "../lib/site";
-import { pageMetadata, videosJsonLd } from "../lib/seo";
-import VideoPlayer from "../components/VideoPlayer";
+import WorkHeader from "../../components/WorkHeader";
+import JsonLd from "../../components/JsonLd";
+import { getWork } from "../../lib/site";
+import { pageMetadata, videosJsonLd } from "../../lib/seo";
+import VideoPlayer from "../../components/VideoPlayer";
 
 const item = getWork("character-animations");
 

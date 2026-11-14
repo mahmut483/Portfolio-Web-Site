@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import CopyableField from "../components/CopyableField";
-import { ArrowUpRight } from "../components/icons";
-import { pages, site } from "../lib/site";
-import { pageMetadata } from "../lib/seo";
-import { container } from "../lib/ui";
+import CopyableField from "../../components/CopyableField";
+import { ArrowUpRight } from "../../components/icons";
+import { pages, site } from "../../lib/site";
+import { pageMetadata } from "../../lib/seo";
+import { container } from "../../lib/ui";
 
 export const metadata: Metadata = pageMetadata({ path: "/contact", ...pages.contact });
 

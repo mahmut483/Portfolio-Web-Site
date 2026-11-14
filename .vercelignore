@@ -1,3 +1,57 @@
 # Source footage kept next to the project; the site only serves public/
 mahmut-karaarslan_orijinal_videolar
 mallar
+
+# Backstop: never upload secrets, keys or local tool state. The Vercel CLI does not read .gitignore,
+# so this mirrors its secrets section. Deploys get their config from Vercel env vars, not files.
+.env
+.env.*
+*.pem
+*.key
+*.p8
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.mobileprovision
+*.provisionprofile
+google-services.json
+GoogleService-Info.plist
+*service-account*.json
+*service_account*.json
+*serviceAccount*.json
+*firebase-adminsdk*.json
+*-key.json
+*_key.json
+*credentials*.json
+client_secret*.json
+token.json
+auth.json
+*apikey*
+*api-key*
+*api_key*
+secrets.*
+.secret*
+id_rsa*
+id_ed25519*
+id_ecdsa*
+.ssh/
+.aws/
+.dev.vars
+.sentryclirc
+sentry.properties
+.firebaserc
+.firebase/
+firebase-debug.log
+*.sqlite
+*.sqlite3
+*.db
+.npmrc
+.netrc
+
+# Local tool state
+.claude/
+.idea/
+.vscode/
+*.code-workspace
+*.tsbuildinfo

@@ -1,5 +1,5 @@
-import { ogContentType, ogSize, renderWorkOg } from "../lib/og";
-import { getWork, site } from "../lib/site";
+import { ogContentType, ogSize, renderWorkOg } from "../../lib/og";
+import { getWork, site } from "../../lib/site";
 
 export const alt = `${getWork("character-animations").title} by ${site.name}`;
 export const size = ogSize;

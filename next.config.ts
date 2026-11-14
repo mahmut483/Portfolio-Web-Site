@@ -3,6 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
+  logging: {
+    // Dev logs print Server Function arguments verbatim, which would put the Firebase ID token
+    // from admin login into the terminal. Production never logs them.
+    serverFunctions: false,
+  },
   partialPrefetching: true,
   images: {
     // AVIF first (smallest), WebP for browsers without AVIF support
@@ -14,6 +19,12 @@ const nextConfig: NextConfig = {
   // browser unpack them natively; the loader's JS fallback covers hosts that drop the header.
   headers() {
     return [
+      {
+        // Owner-only admin panel: never indexed. Not listed in robots.txt on purpose, since a
+        // Disallow would stop Google from seeing this noindex and would advertise the path.
+        source: "/admin/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
       {
         // Videos, posters and game files rarely change: cache for a day, then revalidate in the
         // background. After replacing a file in place, visitors may see the old one for up to a day.

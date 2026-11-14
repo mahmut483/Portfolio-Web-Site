@@ -1,10 +1,10 @@
 import Link from "next/link";
-import PreviewVideo from "./components/PreviewVideo";
-import { ArrowUpRight } from "./components/icons";
-import JsonLd from "./components/JsonLd";
-import { profilePageJsonLd } from "./lib/seo";
-import { site, work } from "./lib/site";
-import { container } from "./lib/ui";
+import PreviewVideo from "../components/PreviewVideo";
+import { ArrowUpRight } from "../components/icons";
+import JsonLd from "../components/JsonLd";
+import { profilePageJsonLd } from "../lib/seo";
+import { site, work } from "../lib/site";
+import { container } from "../lib/ui";
 
 export default function Home() {
   return (

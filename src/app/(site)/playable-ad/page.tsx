@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import WorkHeader from "../components/WorkHeader";
-import JsonLd from "../components/JsonLd";
-import { getWork } from "../lib/site";
-import { pageMetadata, playableJsonLd } from "../lib/seo";
-import PlayableFrame from "../components/PlayableFrame";
-import { ArrowUpRight } from "../components/icons";
+import WorkHeader from "../../components/WorkHeader";
+import JsonLd from "../../components/JsonLd";
+import { getWork } from "../../lib/site";
+import { pageMetadata, playableJsonLd } from "../../lib/seo";
+import PlayableFrame from "../../components/PlayableFrame";
+import { ArrowUpRight } from "../../components/icons";
 
 const item = getWork("playable-ad");
 
