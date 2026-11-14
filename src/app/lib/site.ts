@@ -68,7 +68,7 @@ export const work = [
     slug: "character-animations",
     title: "Character Animations",
     description:
-      "2D character rigging and animation in Unity for mobile game marketing creatives and gameplay, by Mahmut Karaarslan.",
+      "2D character rigging and animation in Unity for game marketing creatives and gameplay, by Mahmut Karaarslan.",
     preview: "/media/previews/charanim.mp4",
     poster: "/media/previews/charanim.jpg",
   },
@@ -84,7 +84,7 @@ export const work = [
     slug: "marketing-videos",
     title: "Marketing Videos",
     description:
-      "Video ad creatives for mobile games, built from in-game scenes and edited in After Effects by Mahmut Karaarslan.",
+      "Video ad creatives for games, with 2D animation in Unity and editing in After Effects by Mahmut Karaarslan.",
     preview: "/media/previews/reels.mp4",
     poster: "/media/previews/reels.jpg",
   },
