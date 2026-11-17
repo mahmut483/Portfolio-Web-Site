@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Check, Copy } from "./icons";
+import { track } from "../lib/analytics";
 
 interface CopyableFieldProps {
   label: string;
@@ -37,6 +38,7 @@ export default function CopyableField({ label, value, rowClass }: CopyableFieldP
   }, [copied]);
 
   const copy = async () => {
+    track("contact_copy", { field: label });
     try {
       await navigator.clipboard.writeText(value);
       setCopied(true);
@@ -52,6 +54,7 @@ export default function CopyableField({ label, value, rowClass }: CopyableFieldP
         <button
           type="button"
           onClick={copy}
+          data-track="skip"
           className="group/copy flex w-full items-center justify-between gap-3 text-left transition-colors cursor-pointer"
           title={`Click to copy ${label}`}
         >

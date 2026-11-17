@@ -3,6 +3,7 @@ import Script from "next/script";
 import SiteHeader from "../components/SiteHeader";
 import SmoothScroll from "../components/SmoothScroll";
 import SectionSpy from "../components/SectionSpy";
+import SiteAnalytics from "../components/SiteAnalytics";
 import JsonLd from "../components/JsonLd";
 import { pageMetadata, personJsonLd } from "../lib/seo";
 import { site } from "../lib/site";
@@ -39,6 +40,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <SiteHeader />
       <SmoothScroll />
       <SectionSpy />
+      <SiteAnalytics />
       <div id="content" className="flex flex-1 flex-col">
         {children}
       </div>

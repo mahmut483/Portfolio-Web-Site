@@ -3,6 +3,7 @@
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import { Play } from "./icons";
+import { track } from "../lib/analytics";
 
 interface PlayableFrameProps {
   src: string;
@@ -41,6 +42,34 @@ export default function PlayableFrame({
     return () => document.removeEventListener("visibilitychange", handleVisibility);
   }, []);
 
+  // Analytics: seconds the game was open while the tab was visible, sent when
+  // the visitor leaves the page, switches tabs or closes it
+  useEffect(() => {
+    if (!started) return;
+    let since: number | null = document.hidden ? null : Date.now();
+    let seconds = 0;
+    const pauseClock = () => {
+      if (since !== null) seconds += (Date.now() - since) / 1000;
+      since = null;
+    };
+    const flush = () => {
+      pauseClock();
+      if (seconds >= 1) track("game_play_time", { game_title: title, seconds: Math.round(seconds) });
+      seconds = 0;
+    };
+    const onVisibility = () => {
+      if (document.hidden) flush();
+      else since = Date.now();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("pagehide", flush);
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("pagehide", flush);
+      flush();
+    };
+  }, [started, title]);
+
   // Keyboard and screen reader users land inside the game once it starts
   useEffect(() => {
     if (started) iframeRef.current?.focus();
@@ -49,6 +78,7 @@ export default function PlayableFrame({
   const handleStart = () => {
     // Oyunu başlatmadan önce sayfadaki TÜM videoları durdur
     document.querySelectorAll("video").forEach((v) => v.pause());
+    track("game_start", { game_title: title });
     setStarted(true);
   };
 
@@ -68,6 +98,7 @@ export default function PlayableFrame({
         <button
           type="button"
           onClick={handleStart}
+          data-track="skip"
           className="group absolute inset-0 w-full h-full cursor-pointer"
           aria-label={`Play ${title}`}
         >

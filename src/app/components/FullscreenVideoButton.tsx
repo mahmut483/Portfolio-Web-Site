@@ -1,6 +1,8 @@
 "use client";
 
 import { ArrowUpRight } from "./icons";
+import { track } from "../lib/analytics";
+import { videoTitle } from "../lib/videos";
 
 interface FullscreenVideoButtonProps {
   videoSrc: string;
@@ -20,6 +22,7 @@ export default function FullscreenVideoButton({
   label = "Watch Fullscreen",
 }: FullscreenVideoButtonProps) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    track("video_fullscreen", { video_title: videoTitle(videoSrc) });
     if (!videoId) return;
     const video = document.getElementById(videoId) as FullscreenVideo | null;
     if (!video) return;
